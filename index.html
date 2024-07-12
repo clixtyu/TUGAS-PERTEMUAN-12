@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<script>
+
+//Deklarasi Variabel
+
+let dataArrNama = new Array();
+
+let dataArrNis = new Array();
+
+let dataArrAgama = new Array();
+
+let dataArrAlamat = new Array();
+
+let dataArrjk = new Array();
+
+function simpan(){
+
+//Deklarasi Variabel
+
+let id =(document.tambahpd.id.value);
+
+let nama =(document.tambahpd.nama.value);
+
+let nis =(document.tambahpd:nis.value);
+
+let agama = (document.tambahpd.agama.value);
+
+let alamat = (document.tambahpd.alamat.value);
+  
+let tabelatas='<table border="1" width="600px">';
+
+let tabelth='<tr><th>No</th> <th>Nama</th> <th>NIS</th><th>JK</th><th>Agama</th> <th>Alamat</th> <th>Aksi</th></tr>';
+
+let tabelisi="";
+
+let tabelbawah='</table>';
+
+let jk, optR;
+
+let no=1;.
+
+let pesan="";
+  
+//Khusus Radio dan Checkbox ambil nilai yang terchecked
+
+jk = document.getElementsByName('jk');
+
+for (i = 0; i < jk.length; i++) { . if (jk[i].checked) optR= jk[i].value;
+
+if (nama=="" || nis == "" || agama == "" || alamat =="" || optR==""){
+
+alert("Isian tidak boleh ada yang tidak terisi/dipilih.");
+
+}else{
+
+if(id==""){
+
+//Jika ID kosong Isi array sesuai form
+  
+if(!dataArrNis.includes (nis)){
+
+//cek NIS Ganda
+
+dataArrNama.push(nama);
+
+dataArrNis.push(nis);
+
+dataArrAgama.push(agama);
+
+dataArrAlamat.push(alamat);
+
+dataArrJk.push(optR);
+
+pesan="Tambah data berhasil";
+
+}else{
+
+alert("NIS "+nis+" sudah terinput. Isian NIS tidak boleh ganda.");
+  
+return true;
+
+}
+
+}else{
+
+//Jika ID isi tampilkan array sesuai ID
+
+dataArrNama [id] =nama;
+
+dataArrNis[id]=nis;
+
+dataArrAgama [id] =agama;
+
+dataArrAlamat[id]=alamat;
+
+dataArrJk[id]=optR;
+
+pesan="Edit data berhasil";
+
+}
+
+//Panjang Array
+
+var fLen = dataArrNama.length;
+
+//Tampilkan Array
+  
+for (index = 0; index < fLen; index++) {
+
+tabelisi += "<tr><td id='no'>"+no+"</td>
+
+<td>"+dataArrNama [index]+"</td>
+
+<td>"+dataArrNis [index]+"</td>
+
+<td>"+dataÂrrJk[index]+"</td>
+
+<td>"+dataArrAgama [index]+"</td>
+
+<td>"+dataArrAlamat [index]+"</td><td><a href='#'
+
+onclick='edit("+index+")'>Edit</a> | <a href='#'
+
+onclick='hapus ("+index+") ' >Delete</a></td></tr>";
+
+no++;
+
+}
+
+alert(pesan);
+  
+document.getElementById("tabeldatapd").innerHTML = tabelatas+tabelth+tabelisi+tabelbawah;
+
+4
+
+document.getElementById('reset').click();
+
+(document.tambahpd.id.value)="";
+
+(document.tambahpd.nis.readOnly) = false;
+
+}
+
+}
+
+function reset(){
+
+(document.tambahpd.id.value)="";
+
+(document.tambahpd.nis.readOnly) = false;
+
+}
+
+function edit(a){
+
+(document.tambahpd.id.value)=a;
+
+(document.tambahpd.nama.value) =dataArrNama [a];
+
+(document.tambahpd.nis.value) =dataArrNis[a];
+
+(document.tambahpd.agama.value)=dataArrAgama [a];
+  
+(document.tambahpd.alamat.value)=dataArrAlamat[a];
+
+(document.tambahpd.jk.value)=dataArrJk[a];
+
+(document.tambahpd.nis.readOnly) = true;
+
+}
+
+function hapus (a){
+
+//Hapus Array sesuai Index
+
+dataArrNama=dataArrNama.slice(0,
+
+a).concat(dataArrNama.slice(a + 1));
+
+dataArrNis=dataArrNis.slice(0,
+
+a).concat(dataArrNis.slice(a + 1));
+  
+dataArrNis=dataArrNis.slice(0,
+
+5
+
+a).concat(dataArrNis.slice(a + 1));
+
+dataArrAlamat=dataArrAlamat.slice(0, a).concat(dataArrAlamat.slice(a + 1));
+
+dataArrAgama=dataArrAgama.slice(0,
+
+a).concat(dataArrAgama.slice(a + 1));
+
+dataArrJk=dataArrJk.slice(0,
+
+a).concat(dataArrJk.slice(a + 1));
+
+//Deklarasi Variabel
+
+let tabelatas='<table border="1" width="600px">';
+
+let tabelth='<tr><th>No</th> <th>Nama</th> <th>NIS</th><th>JK</th><th>Agama</th> <th>Alamat</th> <th>Aksi</th></tr>';
+
+let tabelisi="";
+
+let tabelbawah = '</table>';
+
+let no=1;
+  
+var fLen = dataArrNama.length; if(fLen>0){
+
+//Jika Array lebih dari tampilkan for (index = 0; index < fLen; index++) { tabelisi += "<tr><td id='no'>"+no+"</td>
+
+<td>"+dataArrNama [index]+"</td>
+
+<td>"+dataArrNis [index]+"</td>
+
+<td>"+dataArrJk [index]+"</td>
+
+<td>"+dataArrAgama [index]+"</td>
+
+<td>"+dataArrAlamat [index]+"</td><td><a href='#'
+  
+onclick='edit ("+index+")'>Edit</a> | <a href='#' 6 onclick='hapus ("+index+")'>Delete</a></td></tr>"; no++;
+
+}
+
+}else{
+
+//Jika Array kosong tampilan data kosong tabelisi += '<tr><td colspan="7" align="center">Data Kosong</td></tr>';
+
+}
+
+
+alert("Data Berhasil dihapus");
+
+document.getElementById("tabeldatapd").innerHTML = tabelatas+tabelth+tabelisi+tabelbawah;
+
+}
+
+</script>
+
+</head>
+  
+<body>
+
+<h2>Registrasi Peserta Didik<br>SMAN 2 Kota
+
+Tangerang Selatan</h2>
+
+<form name="tambahpd">
+
+<input type="hidden" name="id">
+
+<table>
+
+<tr>
+
+<td>Nama</td>
+
+<td>:</td>
+
+<td><input type="text" name="nama"></td>
+  
+</tr>
+
+<tr>
+
+<td>NIS</td>
+
+<td>:</td>
+
+<td><input type="number" name="nis"></td>
+
+</tr>
+
+<tr>
+
+<td>Jenis Kelamin</td>
+
+<td>&nbsp;</td>
+
+<td>L: <input type="radio" name="jk" value="L">
+
+<br>
+
+P: <input type="radio" name="jk" value="p">
+
+</td>
+
+</tr>
+
+<tr>
+
+<tr>
+  
+<td>Agama</td>
+
+<td>:</td>
+
+<td><select name="agama">
+
+<option value="Islam">Islam</option>
+
+<option value="Kristen">Kristen</option>
+
+<option value="Hindu">Hindu</option>
+
+<option value="Budha">Budha</option>
+
+</select>
+
+</td>
+
+</tr>
+  
+<tr>
+
+<td>Alamat</td>
+
+<td>:</td>
+
+<td><textarea name="alamat"></textarea></td>
+
+</tr>
+
+<tr>
+
+<td colspan="3"><input type="button"
+
+onclick="simpan ()" value="SIMPAN">
+
+<input type="reset" value="RESET" id="reset"
+
+onclick="reset()">
+
+</td>
+
+</tr>
+
+</table>
+
+</form>
+  
+<h2>Daftar Peserta Didik<br>SMAN 2 Kota Tangerang
+
+Selatan</h2>
+
+<div id="tabeldatapd">
+
+<table border="1" width="600px">
+
+<tr><th>No</th><th>Nama</th><th>NIS</th>
+
+<th>JK</th><th>Agama</th><th>Alamat</th>
+
+<th>Aksi</th></tr>
+
+<tr><td colspan="7" align="center">Data
+
+Kosong</td>
+
+</tr>
+
+</table>
+
+</div>
+  
+  </body>
+</html>
